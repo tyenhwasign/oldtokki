@@ -1,33 +1,36 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>행운의 3칸 슬롯머신</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style>
-        /* 슬롯 회전 애니메이션 효과 정의 */
-        @keyframes spin {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-100%); }
-        }
-        .slot-spinning {
-            animation: spin 0.1s linear infinite;
-        }
-    </style>
-</head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col items-center p-4 antialiased">
+# 역할
+너는 Streamlit 배포 전문가다.
 
-    <main class="w-full max-w-md bg-white rounded-2xl shadow-xl border border-slate-100 p-6 my-auto space-y-6">
-        
-        <header class="text-center space-y-2 border-b border-slate-100 pb-4">
-            <div class="flex justify-center mb-1">
-                <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Mini Game</span>
-            </div>
-            <h1 class="text-2xl font-black text-slate-900 tracking-tight">🎰 럭키 7 슬롯머신</h1>
-            <p class="text-sm text-slate-500">당신의 오늘 운세를 시험해보세요!</p>
-        </header>
+# 목표
+`htmls/index.html` 파일을 Streamlit 앱에서 열어 보여주는 배포용 `app.py`와 `requirements.txt`를 생성하라.
 
-        <section class="bg-slate-50 rounded-xl p-4 border border-slate-200/60 text-xs space-y-2">
-            <h2 class="font-bold text-slate-700 flex items-center gap-1">⚠️ 반드시 지켜야 할 핵심 조건 3가지</h2>
-            <ul class="list-disc list-inside text-slate-600
+# 프로젝트 정보
+- 아이디어: 버튼을누르면 돌아가는 3칸 슬롯머신, 레몬,수박,키위,바나나,숫자 7,코코넛,사과 있음 숫자 7을 3개 띄우면 성공 확률은 1% 나머지는 무작위 배열
+컨셉: 버튼을누르면 돌아가는 3칸 슬롯머신, 레몬,수박,키위,바나나,숫자 7,코코넛,사과 있음 숫자 7을 3개 띄우면 성공 확률은 1% 나머지는 무작위 배열을(를) 누구나 쉽게 이해하고 바로 사용할 수 있게 만드는 웹앱
+문제: '버튼을누르면 돌아가는 3칸 슬롯머신, 레몬,수박,키위,바나나,숫자 7,코코넛,사과 있음 숫자 7을 3개 띄우면 성공 확률은 1% 나머지는 무작위 배열'는 떠올랐지만 규칙·기능·진행 순서가 아직 정리되지 않았다
+규칙: 버튼을누르면 돌아가는 3칸 슬롯머신, 레몬,수박,키위,바나나,숫자 7,코코넛,사과 있음 숫자 7을 3개 띄우면 성공 확률은 1% 나머지는 무작위 배열 사용 시 반드시 지켜야 할 핵심 조건 3가지를 화면에 안내한다 / 사용자 입력이 비어 있으면 진행할 수 없다 / 결과는 즉시 화면에 반영되고 이전 기록을 확인할 수 있다
+진행 방식: 시작 화면에서 목적 확인 → 필요 정보 입력 → 실행 버튼 클릭 → 결과/피드백 확인 → 기록 저장 또는 공유
+- 타겟 사용자: 버튼을누르면 돌아가는 3칸 슬롯머신, 레몬,수박,키위,바나나,숫자 7,코코넛,사과 있음 숫자 7을 3개 띄우면 성공 확률은 1% 나머지는 무작위 배열을(를) 사용하고 싶은 고등학생
+- 필수 기능: 핵심 입력 폼, 결과 생성/표시, 기록 저장, 버튼을누르면 돌아가는 3칸 슬롯머신, 레몬,수박,키위,바나나,숫자 7,코코넛,사과 있음 숫자 7을 3개 띄우면 성공 확률은 1% 나머지는 무작위 배열 사용 시 반드시 지켜야 할 핵심 조건 3가지를 화면에 안내한다, 사용자 입력이 비어 있으면 진행할 수 없다, 시작 화면에서 목적 확인, 필요 정보 입력, 카드형 레이아웃, 상태 배지, 결과 하이라이트
+- 원하는 디자인/분위기: 카드형 레이아웃, 상태 배지, 결과 하이라이트
+
+# 저장소 폴더 구조 (반드시 이 구조를 전제로 작성)
+```
+내-웹앱/
+├── app.py
+├── requirements.txt
+└── htmls/
+    └── index.html
+```
+
+# 필수 구현 조건
+1) `app.py`는 `htmls/index.html` 파일을 읽어 `st.components.v1.html()` 또는 동등한 방식으로 전체 화면에 렌더링한다.
+2) `index.html` 경로는 `Path(__file__).resolve().parent / "htmls" / "index.html"`처럼 상대 경로로 찾는다.
+3) 파일이 없을 때는 한국어로 친절한 안내 메시지를 보여준다.
+4) 페이지 제목과 간단한 소개 문구를 한국어로 표시한다.
+5) `requirements.txt`에는 `streamlit`만 포함한다.
+6) 코드 생략 없이 전체 파일을 출력한다.
+
+# 출력 형식
+- 먼저 ```python 코드블록(app.py 전체)
+- 다음 ```txt 코드블록(requirements.txt)
